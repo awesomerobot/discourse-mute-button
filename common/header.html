@@ -1,0 +1,50 @@
+<script type="text/discourse-plugin" version="0.8">
+  const ajax = require('discourse/lib/ajax').ajax;
+  const { h } = require('virtual-dom');
+  
+  api.modifyClass('component:topic-timeline', {
+    toggleMute() {
+      if (this.get("topic.details.notification_level") > 0) {
+        return ajax("/t/" + this.get("topic.id") + "/notifications", {
+          type: "POST",
+          data: {
+            notification_level: 0
+          }
+        });
+        
+      } else {
+        buttonText = "Mute";
+        return ajax("/t/" + this.get("topic.id") + "/notifications", {
+          type: "POST",
+          data: {
+            notification_level: 1
+          }
+        });
+        
+      }
+    }
+    
+  });
+  
+  api.createWidget('mute-button', {
+    tagName: 'button.btn.btn-default',
+    html(attrs, state) {
+      if (this.attrs.notificationLevel > 0) {
+        return h('span', [h('i.d-icon.fa.fa-bell-slash'),"Mute"], );
+      } else {
+        return h('span', [h('i.d-icon.fa.fa-bell'),"Unmute"], );
+      }
+    },
+    click() {
+      this.sendWidgetAction('toggleMute');
+    }
+  });
+  
+  
+  api.decorateWidget('topic-timeline:after', function(helper) {
+    return helper.attach('mute-button');
+  });
+  
+  
+</script>
+
