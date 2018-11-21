@@ -27,7 +27,7 @@
   });
   
   api.createWidget('mute-button', {
-    tagName: 'button.btn.btn-default',
+    tagName: 'button.btn.btn-default.discourse-mute-button',
     html(attrs, state) {
       if (this.attrs.notificationLevel > 0) {
         return h('span', [h('i.d-icon.fa.fa-bell-slash'),"Mute"], );
