@@ -1,0 +1,4 @@
+svg_icons: 
+  default: 'bell|bell-slash'
+  type: list
+  description: Additional FontAwesome 5 icons

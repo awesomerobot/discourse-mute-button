@@ -1,7 +1,8 @@
 <script type="text/discourse-plugin" version="0.8">
   const ajax = require('discourse/lib/ajax').ajax;
   const { h } = require('virtual-dom');
-  
+  const { iconNode } = require("discourse-common/lib/icon-library");
+
   api.modifyClass('component:topic-timeline', {
     toggleMute() {
       if (this.get("topic.details.notification_level") > 0) {
@@ -30,9 +31,9 @@
     tagName: 'button.btn.btn-default.discourse-mute-button',
     html(attrs, state) {
       if (this.attrs.notificationLevel > 0) {
-        return h('span', [h('i.d-icon.fa.fa-bell-slash'),"Mute"], );
+        return h('span', [iconNode('bell-slash'),"Mute"], );
       } else {
-        return h('span', [h('i.d-icon.fa.fa-bell'),"Unmute"], );
+        return h('span', [iconNode('bell'),"Unmute"], );
       }
     },
     click() {
