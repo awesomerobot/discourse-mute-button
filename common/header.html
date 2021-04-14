@@ -14,7 +14,6 @@
         });
         
       } else {
-        buttonText = "Mute";
         return ajax("/t/" + this.get("topic.id") + "/notifications", {
           type: "POST",
           data: {
